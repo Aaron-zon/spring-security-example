@@ -12,7 +12,6 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "sys_user")
 public class LoginUser implements UserDetails {
     private User user;
 

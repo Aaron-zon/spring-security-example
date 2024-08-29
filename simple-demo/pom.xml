@@ -57,7 +57,7 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.33</version>
     </dependency>
-    
+
     <dependency>
       <groupId>javax.xml.bind</groupId>
       <artifactId>jaxb-api</artifactId>

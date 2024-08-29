@@ -18,15 +18,18 @@ public class UserDetailsServiceImpl extends ServiceImpl<UserMapper, User> implem
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 用于查询数据库中对应的用户信息，该方法在验证时会被自动调用
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-//        wrapper.eq(User::getUserName, username);
-//        User user = userMapper.selectOne(wrapper);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", username);
         User user = userMapper.selectOne(queryWrapper);
-        if (user == null) throw new RuntimeException("用户名或密码错误2");
+        if (user == null) throw new RuntimeException("用户名或密码错误");
         return new LoginUser(user);
     }
 }

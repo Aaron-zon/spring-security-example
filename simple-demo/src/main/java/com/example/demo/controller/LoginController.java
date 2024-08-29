@@ -24,4 +24,14 @@ public class LoginController {
             return null;
         }
     }
+
+    @RequestMapping("/logout")
+    public Map logout() {
+        try {
+            return loginServcie.logout();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

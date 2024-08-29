@@ -5,6 +5,7 @@ import com.example.demo.domain.LoginUser;
 import com.example.demo.domain.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.LoginServcie;
+import com.example.demo.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,11 +32,12 @@ public class LoginServiceImpl extends ServiceImpl<UserMapper, User> implements L
 
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         String userId = loginUser.getUser().getId().toString();
-//        String jwt = JwtUtil.createJWT(userId);
-        System.out.println("userId: " + userId);
+        String username = loginUser.getUsername();
+        String jwt = JwtUtil.createJWT(userId, username, loginUser.getUser(), 3600000);
+        System.out.println("jwt: " + jwt);
 
         HashMap<String, String> map = new HashMap<>();
-        map.put("token", userId);
+        map.put("token", jwt);
         return map;
     }
 }
